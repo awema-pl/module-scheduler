@@ -60,6 +60,7 @@ class Scheduler implements SchedulerContract
         $prefix = config('scheduler.routes.user.schedule.prefix');
         $namePrefix = config('scheduler.routes.user.schedule.name_prefix');
         $middleware = config('scheduler.routes.user.schedule.middleware');
+
         $this->router->prefix($prefix)->name($namePrefix)->middleware($middleware)->group(function () {
             $this->router
                 ->get('/', '\AwemaPL\Scheduler\User\Sections\Schedules\Http\Controllers\ScheduleController@index')
