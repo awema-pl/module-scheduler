@@ -20,8 +20,8 @@ class EloquentSchedule extends JsonResource
             'cron' => $this->cron,
            'activated' => $this->activated,
             'created_at' =>$this->created_at->format('Y-m-d H:i:s'),
-            'sourceable_type' =>$this->sourceable_type,
-            'sourceable_id' =>$this->sourceable_id,
+            'schedulable_type' =>$this->schedulable_type,
+            'schedulable_id' =>$this->schedulable_id,
         ];
     }
 }

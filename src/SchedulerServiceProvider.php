@@ -3,6 +3,7 @@
 namespace AwemaPL\Scheduler;
 
 
+use AwemaPL\Scheduler\User\Sections\Schedules\Console\Commands\CallSchedule;
 use AwemaPL\Scheduler\User\Sections\Schedules\Models\Schedule;
 use AwemaPL\Scheduler\User\Sections\Schedules\Repositories\Contracts\ScheduleRepository;
 use AwemaPL\Scheduler\User\Sections\Schedules\Repositories\EloquentScheduleRepository;
@@ -14,6 +15,8 @@ use AwemaPL\Scheduler\Admin\Sections\Installations\Http\Middleware\GroupMiddlewa
 use AwemaPL\Scheduler\Admin\Sections\Installations\Http\Middleware\Installation;
 use AwemaPL\Scheduler\Admin\Sections\Installations\Http\Middleware\RouteMiddleware;
 use AwemaPL\Scheduler\Contracts\Scheduler as SchedulerContract;
+use AwemaPL\Storage\Console\Commands\ImportProductCommand;
+use AwemaPL\Storage\Console\Commands\UpdateProductCommand;
 use Illuminate\Support\Facades\Event;
 
 class SchedulerServiceProvider extends AwemaProvider
@@ -39,6 +42,8 @@ class SchedulerServiceProvider extends AwemaProvider
         app('scheduler')->menuMerge();
         app('scheduler')->mergePermissions();
         $this->registerPolicies();
+        $this->registerSchedules();
+        $this->registerCommands();
         Event::subscribe(EventSubscriber::class);
         parent::boot();
     }
@@ -124,5 +129,27 @@ class SchedulerServiceProvider extends AwemaProvider
     {
         $kernel = $this->app->make(\Illuminate\Contracts\Http\Kernel::class);
         $kernel->pushMiddleware(GlobalMiddleware::class);
+    }
+
+    /**
+     * Register commands
+     */
+    private function registerCommands()
+    {
+        $this->commands([
+           CallSchedule::class,
+        ]);
+    }
+
+    /**
+     * Register schedules
+     */
+    private function registerSchedules()
+    {
+        $this->callAfterResolving(\Illuminate\Console\Scheduling\Schedule::class, function (\Illuminate\Console\Scheduling\Schedule $schedule) {
+            $schedule->command('module-scheduler:run')
+                ->cron('* * * * *')
+                ->onOneServer();
+        });
     }
 }

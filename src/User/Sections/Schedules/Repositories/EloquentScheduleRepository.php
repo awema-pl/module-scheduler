@@ -2,7 +2,7 @@
 
 namespace AwemaPL\Scheduler\User\Sections\Schedules\Repositories;
 
-use AwemaPL\Sceduler\User\Sections\Schedules\Services\SchedulableType;
+use AwemaPL\Scheduler\User\Sections\Schedules\Services\SchedulableType;
 use AwemaPL\Scheduler\Contracts\Schedulable;
 use AwemaPL\Scheduler\User\Sections\Schedules\Models\Schedule;
 use AwemaPL\Scheduler\User\Sections\Schedules\Repositories\Contracts\ScheduleRepository;
@@ -12,6 +12,7 @@ use AwemaPL\Storage\User\Sections\Sources\Models\Contracts\Sourceable;
 use AwemaPL\Storage\User\Sections\Sources\Services\SourceTypes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\LazyCollection;
 
 class EloquentScheduleRepository extends BaseRepository implements ScheduleRepository
 {
@@ -125,5 +126,15 @@ class EloquentScheduleRepository extends BaseRepository implements ScheduleRepos
             ]);
         }
         return $data;
+    }
+
+    /**
+     * Get schedule activated cursor
+     *
+     * @return LazyCollection|Schedule[]
+     */
+    public function getScheduleActivatedCursor(): ?LazyCollection
+    {
+        return Schedule::where('activated', true)->cursor();
     }
 }

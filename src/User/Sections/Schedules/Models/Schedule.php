@@ -19,7 +19,7 @@ class Schedule extends Model implements ScheduleContract
      * @var array
      */
     protected $fillable = [
-       'user_id', 'name', 'cron', 'activated', 'sourceable_type', 'sourceable_id'
+       'user_id', 'name', 'cron', 'activated', 'schedulable_type', 'schedulable_id'
     ];
 
     /**
@@ -30,7 +30,7 @@ class Schedule extends Model implements ScheduleContract
     protected $casts = [
         'user_id' => 'integer',
         'activated' =>'boolean',
-        'sourceable_id' =>'integer',
+        'schedulable_id' =>'integer',
     ];
 
     /**
@@ -59,4 +59,11 @@ class Schedule extends Model implements ScheduleContract
         return $this->belongsTo(config('auth.providers.users.model'));
     }
 
+    /**
+     * Get the parent schedulable model.
+     */
+    public function schedulable()
+    {
+        return $this->morphTo();
+    }
 }

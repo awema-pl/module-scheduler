@@ -2,6 +2,8 @@
 
 namespace AwemaPL\Scheduler\Contracts;
 
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
@@ -17,9 +19,9 @@ interface Schedulable
     /**
      * Get the user that owns the integration.
      *
-     * @return HasOneThrough
+     * @return BelongsTo
      */
-    public function user(): HasOneThrough;
+    public function user(): BelongsTo;
 
     /**
      * Event schedule
@@ -31,14 +33,14 @@ interface Schedulable
     /**
      * Get key
      *
-     * @return string
+     * @return mixed
      */
-    public function getKey(): string;
+    public function getKey();
 
     /**
      * Get name
      *
      * @return string
      */
-    public function getname(): string;
+    public function getName(): string;
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace AwemaPL\Sceduler\User\Sections\Schedules\Services;
+namespace AwemaPL\Scheduler\User\Sections\Schedules\Services;
 
 use AwemaPL\Storage\Sourceables\Sections\Xmlceneo\Models\Xmlceneo;
 use AwemaPL\Storage\User\Sections\Sources\Services\Contracts\SourceType as SourceTypeContract;
@@ -9,13 +9,24 @@ use InvalidArgumentException;
 
 class SchedulableType
 {
-    /**
-     * @var array  Source::class =>[
-     * 'default_name' =>'Storage Source',
-     * 'key' => 'storage_source',
-     * ]
-     */
+    /** @var array $types */
     public static $types = [];
+
+    /**
+     * Add type from service provider
+     *
+     * @param $schedulableClass
+     * @param $defaultName
+     * @param $key
+     * @return void
+     */
+    public static function addType($schedulableClass, $defaultName, $key)
+    {
+        self::$types[$schedulableClass] = [
+            'default_name' =>$defaultName,
+            'key' =>$key,
+        ];
+    }
 
     /**
      * Get types
@@ -24,7 +35,7 @@ class SchedulableType
      */
     public function getTypes()
     {
-        return self::TYPES;
+        return self::$types;
     }
 
     /**

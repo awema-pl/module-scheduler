@@ -2,9 +2,11 @@
 
 namespace AwemaPL\Scheduler\User\Sections\Schedules\Repositories\Contracts;
 
+use AwemaPL\Scheduler\User\Sections\Schedules\Models\Schedule;
 use AwemaPL\Scheduler\User\Sections\Schedules\Repositories\EloquentScheduleRepository;
 use AwemaPL\Scheduler\Sections\Options\Http\Requests\UpdateOption;
 use Illuminate\Http\Request;
+use Illuminate\Support\LazyCollection;
 
 interface ScheduleRepository
 {
@@ -64,4 +66,11 @@ interface ScheduleRepository
      * @return array
      */
     public function selectSchedulableId($schedulableType);
+
+    /**
+     * Get schedule activated cursor
+     *
+     * @return LazyCollection|Schedule[]
+     */
+    public function getScheduleActivatedCursor(): ?LazyCollection;
 }

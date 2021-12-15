@@ -8,7 +8,7 @@ return [
             "headline" => "Installation module Scheduler",
             "send_text" => "Install",
             "will_be_execute_migrations" => "Will be execute package migrations"
-        ],
+        ]
     ],
     "user" => [
         "schedule" => [
@@ -36,7 +36,15 @@ return [
             "check_connection" => "Check connection",
             "are_you_sure_check_connection" => "Are you sure check connection?",
             "no" => "No",
-            "yes" => "Yes"
+            "yes" => "Yes",
+            "activated" => "Activated",
+            "add" => "Add",
+            "schedule_type" => "Schedule type",
+            "select_schedule_type" => "Select the type of schedule",
+            "types" => [
+                "storage_source" => "Źródło magazynu"
+            ],
+            "select_schedule" => "Select a schedule"
         ]
     ]
 ];

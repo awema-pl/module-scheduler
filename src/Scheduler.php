@@ -78,11 +78,11 @@ class Scheduler implements SchedulerContract
                 ->delete('{id?}', '\AwemaPL\Scheduler\User\Sections\Schedules\Http\Controllers\ScheduleController@delete')
                 ->name('delete');
             $this->router
-                ->get('/select-sourceable-type', '\AwemaPL\Scheduler\User\Sections\Schedules\Http\Controllers\ScheduleController@selectSourceableType')
-                ->name('select_sourceable_type');
+                ->get('/select-schedulable-type', '\AwemaPL\Scheduler\User\Sections\Schedules\Http\Controllers\ScheduleController@selectSourceableType')
+                ->name('select_schedulable_type');
             $this->router
-                ->get('/select-sourceable-id', '\AwemaPL\Scheduler\User\Sections\Schedules\Http\Controllers\ScheduleController@selectSourceableId')
-                ->name('select_sourceable_id');
+                ->get('/select-schedulable-id', '\AwemaPL\Scheduler\User\Sections\Schedules\Http\Controllers\ScheduleController@selectSourceableId')
+                ->name('select_schedulable_id');
         });
     }
 
